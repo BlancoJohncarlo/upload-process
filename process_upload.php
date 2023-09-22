@@ -49,13 +49,13 @@ function insertDataIntoTable($conn, $sql, $data) {
     $stmt->bind_param($types, ...$data);
 
     if ($stmt->execute()) {
+        $stmt->close(); // Close the statement
         return true;
     } else {
         die("Error inserting data: " . $stmt->error);
     }
-
-    $stmt->close();
 }
+
 
 // Check if a file was uploaded
 if (isset($_FILES['fileToUpload']) && $_FILES['fileToUpload']['error'] === UPLOAD_ERR_OK) {
